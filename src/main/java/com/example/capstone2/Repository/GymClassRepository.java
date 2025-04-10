@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClassGymRepository extends JpaRepository<GymClass,Integer> {
-    GymClass findClassById(Integer gymId);
+public interface GymClassRepository extends JpaRepository<GymClass,Integer> {
+    GymClass findGymClassById(Integer gymId);
 }

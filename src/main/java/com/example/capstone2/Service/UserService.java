@@ -1,7 +1,7 @@
 package com.example.capstone2.Service;
 
 import com.example.capstone2.Model.User;
-import com.example.capstone2.Repository.ClassGymRepository;
+import com.example.capstone2.Repository.GymClassRepository;
 import com.example.capstone2.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-    private final ClassGymRepository classGymRepository;
+    private final GymClassRepository classGymRepository;
 
     //     Get all Users
     public List<User> getAllUsers() {
