@@ -10,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/v1/gym/ؤoach")
+@RequestMapping("/api/v1/gym/coach")
 @RequiredArgsConstructor
 public class CoachController {
     private final CoachService coachService;
@@ -55,5 +57,12 @@ public class CoachController {
         }
         return ResponseEntity.status(400).body(new ApiResponse("Not found"));
     }
+
+    // best coaches
+    @GetMapping("/top-coaches")
+    public ResponseEntity<List<Coach>> getCoachesOrdered() {
+        return ResponseEntity.ok(coachService.getAllCoachesOrderedByExperience());
+    }
+
 
 }

@@ -50,4 +50,9 @@ public class CoachService {
         coachRepository.delete(deleteCoach);
         return true;
     }
+
+    // Show the best coaches
+    public List<Coach> getAllCoachesOrderedByExperience() {
+        return coachRepository.getAllCoachesOrderByYearsOfExperienceDesc();
+    }
 }
