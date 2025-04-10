@@ -34,6 +34,10 @@ public class User {
     @Column(columnDefinition = "varchar(255) not null unique")
     private String email;
 
+    @NotNull(message = "The age must not be empty")
+    @Column(columnDefinition = "int not null ")
+    private Integer age;
+
     @NotEmpty(message = "The password must not be empty")
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).{7,}$", message = "Password must contain at least one letter and one number")
     @Column(columnDefinition = "varchar(255) not null")
@@ -53,9 +57,6 @@ public class User {
     @Column(columnDefinition = "date")
     private LocalDate startData;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(columnDefinition = "date")
-    private LocalDate endDate;
 
     @NotNull(message = "The 'class Gym Id' must be NOT Null")
     @Column(columnDefinition = "int not null")

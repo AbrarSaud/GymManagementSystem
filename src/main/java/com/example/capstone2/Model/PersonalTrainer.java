@@ -9,8 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -21,8 +20,10 @@ public class PersonalTrainer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(columnDefinition = "int not null")
     private Integer userId;
 
+    @Column(columnDefinition = "int not null")
     private Integer coachId;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -37,15 +38,11 @@ public class PersonalTrainer {
     @Positive(message = "Price must be positive")
     private Integer price;
 
-    private  String bmi;
-//    Less than 18.5: underweight
-//18.5 to 24.9: normal weight
-//25 to 29.9: overweight
-//30 or higher: obese
-
-
-
-
+    private String bmi;
+//    18.5: underweight
+//    18.5 to 24.9: normal weight
+//    25 to 29.9: overweight
+//    30 or higher: obese
 
 
 }
