@@ -58,9 +58,4 @@ public class User {
     private LocalDate startData;
 
 
-    @NotNull(message = "The 'class Gym Id' must be NOT Null")
-    @Column(columnDefinition = "int not null")
-    private Integer classGymId;
-
-
 }

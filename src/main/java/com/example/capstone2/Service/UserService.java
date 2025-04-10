@@ -1,6 +1,5 @@
 package com.example.capstone2.Service;
 
-import com.example.capstone2.Model.ClassGym;
 import com.example.capstone2.Model.User;
 import com.example.capstone2.Repository.ClassGymRepository;
 import com.example.capstone2.Repository.UserRepository;
@@ -22,10 +21,9 @@ public class UserService {
 
     //     Add a new User
     public void addUser(User user) {
-        ClassGym classGym = classGymRepository.findClassById(user.getClassGymId());
-        if (classGym != null) {
+
             userRepository.save(user);
-        }
+
     }
 
     //     Update a User
@@ -46,7 +44,6 @@ public class UserService {
         oldUser.setWeight(user.getWeight());
         oldUser.setHeight(user.getHeight());
         oldUser.setStartData(user.getStartData());
-        oldUser.setClassGymId(user.getClassGymId());
         userRepository.save(oldUser);
         return true;
     }

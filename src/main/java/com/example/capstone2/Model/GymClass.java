@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-public class ClassGym {
+public class GymClass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +43,10 @@ public class ClassGym {
     @NotNull(message = "The 'Coach Id' must be NOT Null")
     @Column(columnDefinition = "int not null")
     private Integer coachId;
+
+    @NotNull(message = "The 'userId' must be NOT Null")
+    @Column(columnDefinition = "int not null")
+    private Integer userId;
 }
 
 
