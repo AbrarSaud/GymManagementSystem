@@ -19,7 +19,7 @@ import java.time.LocalDate;
 public class PersonalTraining {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer personalTrainingId;
 
     @Column(columnDefinition = "int not null")
     @NotNull(message = "The user id must not be empty")

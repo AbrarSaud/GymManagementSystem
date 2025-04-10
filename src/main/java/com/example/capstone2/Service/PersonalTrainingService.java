@@ -26,8 +26,8 @@ public class PersonalTrainingService {
 
     //     Add a new PersonalTraining
     public void addPersonalTrainingPersonalTraining(PersonalTraining personalTraining) {
-        User user = userRepository.findUserById((personalTraining.getUserId()));
-        Coach coach = coachRepository.findCoachById(personalTraining.getCoachId());
+        User user = userRepository.findUserByUserId((personalTraining.getUserId()));
+        Coach coach = coachRepository.findCoachByCoachId(personalTraining.getCoachId());
         if (user != null || coach != null) {
             personalTrainingRepository.save(personalTraining);
         }
@@ -36,9 +36,9 @@ public class PersonalTrainingService {
 
     //     Update a PersonalTraining
     public Boolean updatePersonalTraining(Integer pt_id, PersonalTraining personalTraining) {
-        PersonalTraining oldPersonalTraining = personalTrainingRepository.findPersonalTrainingById(pt_id);
-        User user = userRepository.findUserById((personalTraining.getUserId()));
-        Coach coach = coachRepository.findCoachById(personalTraining.getCoachId());
+        PersonalTraining oldPersonalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(pt_id);
+        User user = userRepository.findUserByUserId((personalTraining.getUserId()));
+        Coach coach = coachRepository.findCoachByCoachId(personalTraining.getCoachId());
         if (oldPersonalTraining == null || user != null || coach != null) {
             return false;
         }
@@ -52,7 +52,7 @@ public class PersonalTrainingService {
 
     //     Delete a PersonalTraining
     public Boolean deletePersonalTraining(Integer pt_id) {
-        PersonalTraining deletePersonalTraining = personalTrainingRepository.findPersonalTrainingById(pt_id);
+        PersonalTraining deletePersonalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(pt_id);
         if (deletePersonalTraining == null) {
             return false;
         }

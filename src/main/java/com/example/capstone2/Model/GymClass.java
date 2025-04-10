@@ -20,7 +20,8 @@ public class GymClass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ClassGymId;
+    private Integer gymClassId;
+
 
     @Column(columnDefinition = "varchar(20) not null")
     @NotEmpty(message = "Name must not be Empty")

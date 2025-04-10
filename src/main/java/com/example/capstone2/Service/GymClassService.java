@@ -25,8 +25,8 @@ public class GymClassService {
 
     //     Add a new GymClass
     public void addGymClass(GymClass gymClass) {
-        User user = userRepository.findUserById(gymClass.getUserId());
-        Coach coach = coachRepository.findCoachById(gymClass.getCoachId());
+        User user = userRepository.findUserByUserId(gymClass.getUserId());
+        Coach coach = coachRepository.findCoachByCoachId(gymClass.getCoachId());
         if (user != null || coach != null) {
             gymClassRepository.save(gymClass);
         }
@@ -34,9 +34,9 @@ public class GymClassService {
 
     //     Update a GymClass
     public Boolean updateGymClass(Integer gymClass_id, GymClass gymClass) {
-        GymClass oldGymClass = gymClassRepository.findGymClassById(gymClass_id);
-        User user = userRepository.findUserById(gymClass.getUserId());
-        Coach coach = coachRepository.findCoachById(gymClass.getCoachId());
+        GymClass oldGymClass = gymClassRepository.findGymClassByGymClassId(gymClass_id);
+        User user = userRepository.findUserByUserId(gymClass.getUserId());
+        Coach coach = coachRepository.findCoachByCoachId(gymClass.getCoachId());
         if (oldGymClass == null || user == null || coach == null) {
             return false;
         }
@@ -52,7 +52,7 @@ public class GymClassService {
 
     //     Delete a GymClass
     public Boolean deleteGymClass(Integer gymClass_id) {
-        GymClass deleteGymClass = gymClassRepository.findGymClassById(gymClass_id);
+        GymClass deleteGymClass = gymClassRepository.findGymClassByGymClassId(gymClass_id);
         if (deleteGymClass == null) {
             return false;
         }

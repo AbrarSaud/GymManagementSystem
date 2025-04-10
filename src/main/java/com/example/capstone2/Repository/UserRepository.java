@@ -10,10 +10,11 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    User findUserById(Integer userId);
+    User findUserByUserId(Integer userId);
+
 
     //Show a list of users bmi >= 25
-    @Query("select u from User u where u.bmi >= ?25")
+    @Query("select u from User u where u.bmi >= 25")
     List<User> getUsersWithBmiGreater();
 
     //Show a list of New users

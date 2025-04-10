@@ -28,7 +28,7 @@ public class UserService {
 
     //     Update a User
     public Boolean updateUser(Integer user_id, User user) {
-        User oldUser = userRepository.findUserById(user_id);
+        User oldUser = userRepository.findUserByUserId(user_id);
         if (oldUser == null) {
             return false;
         }
@@ -52,7 +52,7 @@ public class UserService {
 
     //     Delete a User
     public Boolean deleteUser(Integer user_id) {
-        User userToDelete = userRepository.findUserById(user_id);
+        User userToDelete = userRepository.findUserByUserId(user_id);
         if (userToDelete == null) {
             return false;
         }
@@ -75,6 +75,7 @@ public class UserService {
     private void calculateBmi(User user) {
         Double bmi = user.getWeight() / Math.pow(user.getHeight() / 100.0, 2);
         bmi = (int) (bmi * 100) / 100.0;
+        user.setBmi(bmi);
 
         String category;
         if (bmi < 18.5) {

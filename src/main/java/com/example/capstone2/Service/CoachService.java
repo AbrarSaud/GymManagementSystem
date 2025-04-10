@@ -26,7 +26,7 @@ public class CoachService {
 
     //     Update a Coach
     public Boolean updateCoach(Integer coach_id, Coach coach) {
-        Coach oldCoach = coachRepository.findCoachById(coach_id);
+        Coach oldCoach = coachRepository.findCoachByCoachId(coach_id);
         if (oldCoach == null) {
             return false;
         }
@@ -43,7 +43,7 @@ public class CoachService {
 
     //     Delete a Coach
     public Boolean deleteCoach(Integer coach_id) {
-        Coach deleteCoach = coachRepository.findCoachById(coach_id);
+        Coach deleteCoach = coachRepository.findCoachByCoachId(coach_id);
         if (deleteCoach == null) {
             return false;
         }

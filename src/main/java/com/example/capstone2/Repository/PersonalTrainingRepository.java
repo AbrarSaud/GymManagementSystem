@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PersonalTrainingRepository extends JpaRepository<PersonalTraining, Integer> {
-    PersonalTraining findPersonalTrainingById(Integer personalTrainingId);
+    PersonalTraining findPersonalTrainingByPersonalTrainingId(Integer personalTrainingId);
 
-    // Calculate the user's BMI from their weight and height.
-    User findUserByWeightAndHeight(Integer weight, Integer height);
+//    // Calculate the user's BMI from their weight and height.
+//    User findUserByWeightAndHeight(Integer weight, Integer height);
 
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CoachRepository  extends JpaRepository<Coach,Integer> {
-    Coach findCoachById(Integer coachId);
+    Coach findCoachByCoachId(Integer coachId);
+
 
 }

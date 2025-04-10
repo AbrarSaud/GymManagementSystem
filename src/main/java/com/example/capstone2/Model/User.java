@@ -57,8 +57,9 @@ public class User {
     @Column(columnDefinition = "date")
     private LocalDate startData;
 
-    @Column(columnDefinition = "int")
-    private Integer bmi;
+    @Column(columnDefinition = "double")
+    private Double bmi;
+
 
     @Column(columnDefinition = "varchar(255) ")
     private String categoryBmi;

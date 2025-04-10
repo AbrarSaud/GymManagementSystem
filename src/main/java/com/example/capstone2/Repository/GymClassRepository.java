@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GymClassRepository extends JpaRepository<GymClass,Integer> {
-    GymClass findGymClassById(Integer gymId);
+  GymClass findGymClassByGymClassId(Integer gymClassId);
+
 }
