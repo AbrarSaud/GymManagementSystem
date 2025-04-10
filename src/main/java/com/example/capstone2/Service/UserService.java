@@ -6,6 +6,7 @@ import com.example.capstone2.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -21,9 +22,8 @@ public class UserService {
 
     //     Add a new User
     public void addUser(User user) {
-
-            userRepository.save(user);
-
+        calculateBmi(user);
+        userRepository.save(user);
     }
 
     //     Update a User
@@ -44,6 +44,8 @@ public class UserService {
         oldUser.setWeight(user.getWeight());
         oldUser.setHeight(user.getHeight());
         oldUser.setStartData(user.getStartData());
+        calculateBmi(oldUser);
+
         userRepository.save(oldUser);
         return true;
     }
@@ -57,4 +59,34 @@ public class UserService {
         userRepository.delete(userToDelete);
         return true;
     }
+
+    //Show a list of users bmi >= 25
+    public List<User> getUsersWithBmi() {
+        return userRepository.getUsersWithBmiGreater();
+    }
+
+    //Show a list of New users
+    public List<User> getNewUsers() {
+        LocalDate weekAgo = LocalDate.now().minusDays(7);
+        return userRepository.findNewUsers(weekAgo);
+    }
+
+    // calculateBmi
+    private void calculateBmi(User user) {
+        Double bmi = user.getWeight() / Math.pow(user.getHeight() / 100.0, 2);
+        bmi = (int) (bmi * 100) / 100.0;
+
+        String category;
+        if (bmi < 18.5) {
+            category = "Underweight";
+        } else if (bmi >= 18.5 && bmi < 24.9) {
+            category = "Normal weight";
+        } else if (bmi >= 25 && bmi < 29.9) {
+            category = "Overweight";
+        } else {
+            category = "Obese";
+        }
+        user.setCategoryBmi(category);
+    }
+
 }

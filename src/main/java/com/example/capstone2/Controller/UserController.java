@@ -54,4 +54,17 @@ public class UserController {
         }
         return ResponseEntity.status(400).body(new ApiResponse("Not found"));
     }
+
+    //Show a list of users bmi >= 25
+    @GetMapping("/high-bmi")
+    public ResponseEntity<?> getUsersWithBmi() {
+        return ResponseEntity.ok(userService.getUsersWithBmi());
+    }
+
+    //Show a list of New users
+    @GetMapping("/new")
+    public ResponseEntity<?> getNewUsersToday() {
+        return ResponseEntity.ok(userService.getNewUsers());
+    }
+
 }
