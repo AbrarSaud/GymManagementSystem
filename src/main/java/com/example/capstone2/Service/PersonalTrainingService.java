@@ -28,7 +28,7 @@ public class PersonalTrainingService {
     public void addPersonalTrainingPersonalTraining(PersonalTraining personalTraining) {
         User user = userRepository.findUserByUserId((personalTraining.getUserId()));
         Coach coach = coachRepository.findCoachByCoachId(personalTraining.getCoachId());
-        if (user != null || coach != null) {
+        if (user != null && coach != null) {
             personalTrainingRepository.save(personalTraining);
         }
 
@@ -39,7 +39,7 @@ public class PersonalTrainingService {
         PersonalTraining oldPersonalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(pt_id);
         User user = userRepository.findUserByUserId((personalTraining.getUserId()));
         Coach coach = coachRepository.findCoachByCoachId(personalTraining.getCoachId());
-        if (oldPersonalTraining == null || user != null || coach != null) {
+        if (oldPersonalTraining == null && user != null && coach != null) {
             return false;
         }
         oldPersonalTraining.setStartDate(personalTraining.getStartDate());

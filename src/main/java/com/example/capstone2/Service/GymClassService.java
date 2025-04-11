@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class GymClassService {
-    private final UserRepository userRepository;
     private final GymClassRepository gymClassRepository;
     private final CoachRepository coachRepository;
 
@@ -25,9 +24,8 @@ public class GymClassService {
 
     //     Add a new GymClass
     public void addGymClass(GymClass gymClass) {
-        User user = userRepository.findUserByUserId(gymClass.getUserId());
         Coach coach = coachRepository.findCoachByCoachId(gymClass.getCoachId());
-        if (user != null || coach != null) {
+        if ( coach != null) {
             gymClassRepository.save(gymClass);
         }
     }
@@ -35,9 +33,8 @@ public class GymClassService {
     //     Update a GymClass
     public Boolean updateGymClass(Integer gymClass_id, GymClass gymClass) {
         GymClass oldGymClass = gymClassRepository.findGymClassByGymClassId(gymClass_id);
-        User user = userRepository.findUserByUserId(gymClass.getUserId());
         Coach coach = coachRepository.findCoachByCoachId(gymClass.getCoachId());
-        if (oldGymClass == null || user == null || coach == null) {
+        if (oldGymClass == null &&  coach == null) {
             return false;
         }
 
@@ -59,4 +56,17 @@ public class GymClassService {
         gymClassRepository.delete(deleteGymClass);
         return true;
     }
+
+
+//    // Reserve  in the class based (capacity)
+//    public GymClass getGymClassByUserAndGymClassId(Integer userId, Integer gymClassId) {
+//        GymClass checkCapacity = gymClassRepository.findGymClassByUserIdAndGymClassId(userId, gymClassId);
+//        if (checkCapacity.getCapacity() > 30) {
+//            return null;
+//        }
+//        return checkCapacity;
+//    }
+
+
+
 }

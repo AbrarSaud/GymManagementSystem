@@ -21,5 +21,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select u from User u where u.startData  >= ?1")
     List<User> findNewUsers(LocalDate today);
 
+    //  Show a list of name  User in class
+    @Query("select u.name from User u where u.userId in :userIds")
+    List<String> findUsernamesByIds(List<Integer> userIds);
 
 }

@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/gym/gym-class")
 @RequiredArgsConstructor
@@ -54,4 +56,18 @@ public class GymClassController {
         }
         return ResponseEntity.status(400).body(new ApiResponse("Not found"));
     }
+
+
+//    // Reserve  in the class based (capacity)
+//    @PutMapping("reserve/{userId}/{gymClassId}")
+//    public ResponseEntity<?> getReserveGymClass(@PathVariable Integer userId,@PathVariable Integer gymClassId) {
+//        GymClass gymClass = gymClassService.getGymClassByUserAndGymClassId(userId, gymClassId);
+//
+//        if (gymClass == null) {
+//            return ResponseEntity.status(404).body(new ApiResponse("Sorry, the gym class is full!"));
+//        }
+//        return ResponseEntity.ok(new ApiResponse("You have successfully reserved the gym class!"));
+//    }
+
+
 }
