@@ -13,12 +13,11 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
     Booking getBookingsById(Integer bookingId);
 
 
-    //  Show the users  in the gym class
     @Query("select b from Booking b where b.userId =?1 and  b.gymClassId=?2")
-    List<Booking> getBookingByUserIdAndGymClassId(Integer userId, Integer gymClassId);
+    Booking getBookingByUserIdAndGymClassId(Integer userId, Integer gymClassId);
 
-    // Show the users
-    @Query("SELECT b.userId FROM Booking b WHERE b.gymClassId = :gymClassId")
+    //  Show the users  in the gym class
+    @Query("select b.userId from Booking b WHERE b.gymClassId = :gymClassId")
     List<Integer> findUserIdsByGymClassId(Integer gymClassId);
 
 

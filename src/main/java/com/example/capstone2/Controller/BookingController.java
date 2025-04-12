@@ -43,15 +43,22 @@ public class BookingController {
         }
         return ResponseEntity.status(200).body(new ApiResponse("Booking deleted !"));
     }
-    @GetMapping("/user/{userId}/{gymClassId}")
-    public ResponseEntity<?> getGymClassesByUser(@PathVariable Integer userId ,@PathVariable  Integer gymClassId) {
-        return ResponseEntity.ok(bookingService.getBookingByUserId(userId , gymClassId));
-    }
+
 
     @GetMapping("/class/{gymClassId}")
     public ResponseEntity<List<String>> getUsernamesInClass(@PathVariable Integer gymClassId) {
         List<String> usernames = bookingService.getUsernamesInGymClass(gymClassId);
         return ResponseEntity.ok(usernames);
     }
+
+    @PutMapping("/change/{userId}/{oldGymClassId}/{newGymClassId}")
+    public ResponseEntity<?> changeUserGymClass(@PathVariable Integer userId, @PathVariable Integer oldGymClassId, @PathVariable Integer newGymClassId) {
+        Boolean isChanged = bookingService.changeUserGymClass(userId, oldGymClassId, newGymClassId);
+        if (!isChanged) {
+            return ResponseEntity.status(404).body(new ApiResponse("Failed to change gym class!"));
+        }
+        return ResponseEntity.ok(new ApiResponse("Successfully changed gym class!"));
+    }
+
 
 }

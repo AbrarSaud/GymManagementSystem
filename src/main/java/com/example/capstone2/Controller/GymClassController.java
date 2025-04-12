@@ -58,16 +58,7 @@ public class GymClassController {
     }
 
 
-//    // Reserve  in the class based (capacity)
-//    @PutMapping("reserve/{userId}/{gymClassId}")
-//    public ResponseEntity<?> getReserveGymClass(@PathVariable Integer userId,@PathVariable Integer gymClassId) {
-//        GymClass gymClass = gymClassService.getGymClassByUserAndGymClassId(userId, gymClassId);
-//
-//        if (gymClass == null) {
-//            return ResponseEntity.status(404).body(new ApiResponse("Sorry, the gym class is full!"));
-//        }
-//        return ResponseEntity.ok(new ApiResponse("You have successfully reserved the gym class!"));
-//    }
+
 
 
 }

@@ -58,14 +58,6 @@ public class GymClassService {
     }
 
 
-//    // Reserve  in the class based (capacity)
-//    public GymClass getGymClassByUserAndGymClassId(Integer userId, Integer gymClassId) {
-//        GymClass checkCapacity = gymClassRepository.findGymClassByUserIdAndGymClassId(userId, gymClassId);
-//        if (checkCapacity.getCapacity() > 30) {
-//            return null;
-//        }
-//        return checkCapacity;
-//    }
 
 
 
