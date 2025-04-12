@@ -126,7 +126,7 @@ public class PersonalTrainingService {
     }
 
     // change Coach
-    public boolean changeCoach(Integer ptId, Integer oldCoachId, Integer newCoachId){
+    public boolean changeCoach(Integer ptId, Integer oldCoachId, Integer newCoachId) {
         PersonalTraining personalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(ptId);
         if (personalTraining == null) {
             return false;
@@ -138,6 +138,24 @@ public class PersonalTrainingService {
         personalTraining.setCoachId(newCoachId);
         personalTrainingRepository.save(personalTraining);
         return true;
+    }
+
+    // extend Freeze
+    public String extendFreeze(Integer pt_Id, Integer extraDays) {
+        PersonalTraining personalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(pt_Id);
+        if (personalTraining == null) {
+            return "Personal training not found.";
+        }
+        if (personalTraining.getFreezeEndDate() == null) {
+            return "No active freeze to extend.";
+        }
+        if (extraDays > 14) {
+            return "Cannot extend freeze by more than 14 days.";
+        }
+
+        personalTraining.setFreezeEndDate(personalTraining.getFreezeEndDate().plusDays(extraDays));
+        personalTrainingRepository.save(personalTraining);
+        return "Freeze period extended successfully by " + extraDays + " days.";
     }
 
     public void price(PersonalTraining personalTraining) {

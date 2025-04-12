@@ -61,8 +61,16 @@ public class GymClassController {
         return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
+    //    update Capacity
+    @PutMapping("/update-capacity/{gymClassId}/{newCapacity}")
+    public ResponseEntity<?> updateCapacity(@PathVariable Integer gymClassId, @PathVariable Integer newCapacity) {
+        boolean isUpdated = gymClassService.updateCapacity(gymClassId, newCapacity);
 
-
+        if (!isUpdated) {
+            return ResponseEntity.status(404).body(new ApiResponse("GymClass not found or capacity is the same"));
+        }
+        return ResponseEntity.ok(new ApiResponse("Capacity updated !"));
+    }
 
 
 }

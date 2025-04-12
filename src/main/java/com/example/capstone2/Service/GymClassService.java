@@ -37,7 +37,7 @@ public class GymClassService {
     public Boolean updateGymClass(Integer gymClass_id, GymClass gymClass) {
         GymClass oldGymClass = gymClassRepository.findGymClassByGymClassId(gymClass_id);
         Coach coach = coachRepository.findCoachByCoachId(gymClass.getCoachId());
-        if (oldGymClass == null &&  coach == null) {
+        if (oldGymClass == null && coach == null) {
             return false;
         }
 
@@ -60,8 +60,20 @@ public class GymClassService {
         return true;
     }
 
+    // update Capacity
+    public boolean updateCapacity(Integer gymClassId, Integer newCapacity) {
+        GymClass gymClass = gymClassRepository.findGymClassByGymClassId(gymClassId);
 
-
+        if (gymClass == null) {
+            return false;
+        }
+        if (gymClass.getCapacity() == (newCapacity)) {
+            return false;
+        }
+        gymClass.setCapacity(newCapacity);
+        gymClassRepository.save(gymClass);
+        return true;
+    }
 
 
 }

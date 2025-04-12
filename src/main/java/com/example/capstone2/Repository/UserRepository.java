@@ -12,7 +12,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findUserByUserId(Integer userId);
 
-
     //Show a list of users bmi >= 25
     @Query("select u from User u where u.bmi >= 25")
     List<User> getUsersWithBmiGreater();
@@ -24,5 +23,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     //  Show a list of name  User in class
     @Query("select u.name from User u where u.userId in :userIds")
     List<String> findUsernamesByIds(List<Integer> userIds);
+
+    @Query("SELECT u FROM User u WHERE u.weight >=?1")
+    List<User> findByWeightGreater(Integer weight);
 
 }

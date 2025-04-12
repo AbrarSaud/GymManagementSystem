@@ -108,4 +108,10 @@ public class PersonalTrainingController {
         return ResponseEntity.ok(new ApiResponse("Coach changed !"));
     }
 
+    @PutMapping("/extend-freeze/{pt_Id}")
+    public ResponseEntity<String> extendFreeze(@PathVariable Integer pt_Id, @RequestParam Integer extraDays) {
+        String message = personalTrainingService.extendFreeze(pt_Id, extraDays);
+        return ResponseEntity.ok(message);
+    }
+
 }

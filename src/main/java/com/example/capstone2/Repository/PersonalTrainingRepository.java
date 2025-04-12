@@ -15,5 +15,3 @@ public interface PersonalTrainingRepository extends JpaRepository<PersonalTraini
 }
 
 
-//    // Calculate the user's BMI from their weight and height.
-//    User findUserByWeightAndHeight(Integer weight, Integer height);
