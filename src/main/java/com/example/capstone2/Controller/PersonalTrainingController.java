@@ -41,7 +41,7 @@ public class PersonalTrainingController {
         if (isUpdate) {
             return ResponseEntity.status(200).body(new ApiResponse("PersonalTraining Update"));
         }
-        return ResponseEntity.status(400).body(new ApiResponse("Not found"));
+        return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
     //      Delete PersonalTraining
@@ -51,6 +51,6 @@ public class PersonalTrainingController {
         if (isDelete) {
             return ResponseEntity.status(200).body(new ApiResponse("PersonalTraining delete"));
         }
-        return ResponseEntity.status(400).body(new ApiResponse("Not found"));
+        return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 }

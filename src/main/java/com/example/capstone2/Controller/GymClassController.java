@@ -44,7 +44,7 @@ public class GymClassController {
         if (isUpdate) {
             return ResponseEntity.status(200).body(new ApiResponse("GymClass Update"));
         }
-        return ResponseEntity.status(400).body(new ApiResponse("Not found"));
+        return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
     //      Delete GymClass
@@ -54,7 +54,7 @@ public class GymClassController {
         if (isDelete) {
             return ResponseEntity.status(200).body(new ApiResponse("GymClass delete"));
         }
-        return ResponseEntity.status(400).body(new ApiResponse("Not found"));
+        return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
 

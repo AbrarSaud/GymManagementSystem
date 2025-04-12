@@ -1,6 +1,7 @@
 package com.example.capstone2.Service;
 
 import com.example.capstone2.Model.Booking;
+import com.example.capstone2.Model.Coach;
 import com.example.capstone2.Model.GymClass;
 import com.example.capstone2.Model.User;
 import com.example.capstone2.Repository.BookingRepository;
@@ -81,5 +82,7 @@ public class BookingService {
         bookingRepository.save(existingBooking);
         return true;
     }
+
+
 
 }

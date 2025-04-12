@@ -46,7 +46,7 @@ public class UserController {
         if (isUpdate) {
             return ResponseEntity.status(200).body(new ApiResponse("User Update"));
         }
-        return ResponseEntity.status(400).body(new ApiResponse("Not found"));
+        return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
     //      Delete User
@@ -56,7 +56,7 @@ public class UserController {
         if (isDelete) {
             return ResponseEntity.status(200).body(new ApiResponse("User delete"));
         }
-        return ResponseEntity.status(400).body(new ApiResponse("Not found"));
+        return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
     //Show a list of users bmi >= 25

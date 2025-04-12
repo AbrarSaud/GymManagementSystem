@@ -45,7 +45,7 @@ public class CoachController {
         if (isUpdate) {
             return ResponseEntity.status(200).body(new ApiResponse("Coach Update"));
         }
-        return ResponseEntity.status(400).body(new ApiResponse("Not found"));
+        return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
     //      Delete Coach
@@ -55,14 +55,23 @@ public class CoachController {
         if (isDelete) {
             return ResponseEntity.status(200).body(new ApiResponse("Coach delete"));
         }
-        return ResponseEntity.status(400).body(new ApiResponse("Not found"));
+        return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
     // best coaches
     @GetMapping("/top-coaches")
-    public ResponseEntity<List<Coach>> getCoachesOrdered() {
+    public ResponseEntity<?> getCoachesOrdered() {
         return ResponseEntity.ok(coachService.getAllCoachesOrderedByExperience());
     }
 
+    // update Coach  Experience
+    @PutMapping("/update-experience/{coach_id}/{newYearsExperience}")
+    public ResponseEntity<?> updateCoachExperience(@PathVariable Integer coach_id, @PathVariable Integer newYearsExperience) {
+        Coach updateCoach = coachService.updateCoachExperience(coach_id, newYearsExperience);
+        if (updateCoach == null) {
+            return ResponseEntity.status(404).body(new ApiResponse("Coach not found or experience not updated."));
+        }
+        return ResponseEntity.ok(new ApiResponse("Coach Update"));
+    }
 
 }

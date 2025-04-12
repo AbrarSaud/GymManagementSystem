@@ -55,4 +55,16 @@ public class CoachService {
     public List<Coach> getAllCoachesOrderedByExperience() {
         return coachRepository.getAllCoachesOrderByYearsOfExperienceDesc();
     }
+
+    // Update coach experience
+    public Coach updateCoachExperience(Integer coach_id, Integer newYearsExperience) {
+        Coach coach = coachRepository.findCoachByCoachId(coach_id);
+        if (coach != null && newYearsExperience > coach.getYearsOfExperience()) {
+            coach.setYearsOfExperience(newYearsExperience);
+            coachRepository.save(coach);
+            return coach;
+        }
+        return null;
+    }
+
 }
