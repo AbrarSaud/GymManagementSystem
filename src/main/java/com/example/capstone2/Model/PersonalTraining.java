@@ -3,6 +3,7 @@ package com.example.capstone2.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.AssertFalse;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -39,11 +40,14 @@ public class PersonalTraining {
     @Positive(message = "Subscription months must be positive")
     private Integer subscriptionMonths;
 
-    @Column(columnDefinition = "int not null")
-    @NotNull(message = "The price must not be empty")
-    @Positive(message = "Price must be positive")
+    @Column(columnDefinition = "int ")
     private Integer price;
 
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isFreeze = false;
+
+    @Column
+    private LocalDate freezeEndDate;
 }
 
 

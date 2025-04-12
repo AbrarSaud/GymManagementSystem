@@ -24,14 +24,12 @@ public class GymClass {
     private String name;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(columnDefinition = "varchar(25) not null")
+    @Column(columnDefinition = "date not null")
     private LocalDateTime time;
 
     @NotNull(message = "The 'capacity' must be NOT Null")
     @Column(columnDefinition = "int not null")
     @Positive
-    @Min(value = 1, message = "Capacity must be at least 1")
-    @Max(value = 20, message = "Capacity cannot be more than 20")
     private Integer capacity;
 
     @NotNull(message = "The 'capacity' must be NOT Null")
@@ -42,7 +40,6 @@ public class GymClass {
     @NotNull(message = "The 'Coach Id' must be NOT Null")
     @Column(columnDefinition = "int not null")
     private Integer coachId;
-
 }
 
 

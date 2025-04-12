@@ -21,9 +21,13 @@ public class UserService {
     }
 
     //     Add a new User
-    public void addUser(User user) {
+    public boolean addUser(User user) {
+        if (user == null) {
+            return false;
+        }
         calculateBmi(user);
         userRepository.save(user);
+        return true;
     }
 
     //     Update a User

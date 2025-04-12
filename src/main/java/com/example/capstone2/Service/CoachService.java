@@ -20,8 +20,12 @@ public class CoachService {
     }
 
     //     Add a new Coach
-    public void addCoach(Coach coach) {
+    public Boolean addCoach(Coach coach) {
+        if (coach == null) {
+            return false;
+        }
         coachRepository.save(coach);
+        return true;
     }
 
     //     Update a Coach

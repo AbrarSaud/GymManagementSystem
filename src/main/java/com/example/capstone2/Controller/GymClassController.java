@@ -30,7 +30,11 @@ public class GymClassController {
         if (errors.hasErrors()) {
             return ResponseEntity.status(400).body(errors.getFieldError().getDefaultMessage());
         }
-        gymClassService.addGymClass(gymClass);
+        boolean isAdded = gymClassService.addGymClass(gymClass);
+
+        if (!isAdded) {
+            return ResponseEntity.status(404).body(new ApiResponse("Coach not found"));
+        }
         return ResponseEntity.status(200).body(new ApiResponse("GymClass added !!"));
     }
 

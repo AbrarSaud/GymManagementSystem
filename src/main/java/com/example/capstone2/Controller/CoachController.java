@@ -31,9 +31,13 @@ public class CoachController {
         if (errors.hasErrors()) {
             return ResponseEntity.status(400).body(errors.getFieldError().getDefaultMessage());
         }
-        coachService.addCoach(coach);
+        boolean isAdded = coachService.addCoach(coach);
+        if (!isAdded) {
+            return ResponseEntity.status(404).body(new ApiResponse("Coach not be added!"));
+        }
         return ResponseEntity.status(200).body(new ApiResponse("Coach added !!"));
     }
+
 
     //     Update Coach
     @PutMapping("/update/{coach_id}")

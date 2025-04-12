@@ -24,17 +24,18 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-
     //     Add a new User
     @PostMapping("/add")
     public ResponseEntity<?> addUser(@Valid @RequestBody User user, Errors errors) {
         if (errors.hasErrors()) {
             return ResponseEntity.status(400).body(errors.getFieldError().getDefaultMessage());
         }
-        userService.addUser(user);
-        return ResponseEntity.status(200).body(new ApiResponse("User added !!"));
+        boolean isAdded = userService.addUser(user);
+        if (!isAdded) {
+            return ResponseEntity.status(404).body(new ApiResponse("User could not be added!"));
+        }
+        return ResponseEntity.status(200).body(new ApiResponse("User added successfully!"));
     }
-
 
     //     Update User
     @PutMapping("/update/{user_id}")

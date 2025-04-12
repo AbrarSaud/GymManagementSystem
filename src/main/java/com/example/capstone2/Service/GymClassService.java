@@ -23,11 +23,14 @@ public class GymClassService {
     }
 
     //     Add a new GymClass
-    public void addGymClass(GymClass gymClass) {
+    public boolean addGymClass(GymClass gymClass) {
         Coach coach = coachRepository.findCoachByCoachId(gymClass.getCoachId());
-        if ( coach != null) {
-            gymClassRepository.save(gymClass);
+        if (coach == null) {
+            return false;
         }
+
+        gymClassRepository.save(gymClass);
+        return true;
     }
 
     //     Update a GymClass
