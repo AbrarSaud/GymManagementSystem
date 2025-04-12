@@ -3,6 +3,7 @@ package com.example.capstone2.Service;
 import com.example.capstone2.Model.Coach;
 import com.example.capstone2.Model.User;
 import com.example.capstone2.Repository.CoachRepository;
+import com.example.capstone2.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CoachService {
     private final CoachRepository coachRepository;
+    private final UserRepository userRepository;
 
 
     //     Get all Coach
@@ -71,4 +73,19 @@ public class CoachService {
         return null;
     }
 
+    public String promoteUserToCoach(Integer userId) {
+        User user = userRepository.findUserByUserId(userId);
+        if (user == null) {
+            throw new RuntimeException("User not found.");
+        }
+
+        Coach coach = new Coach();
+        coach.setName(user.getName());
+        coach.setEmail(user.getEmail());
+        coach.setPassword(user.getPassword());
+        coach.setYearsOfExperience(0);
+        coachRepository.save(coach);
+        userRepository.delete(user);
+        return "User promoted to Coach successfully!";
+    }
 }

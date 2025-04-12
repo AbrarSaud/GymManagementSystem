@@ -78,4 +78,12 @@ public class CoachController {
         return ResponseEntity.ok(new ApiResponse("Coach Update"));
     }
 
+    @PostMapping("/promote/{userId}")
+    public ResponseEntity<String> promoteUserToCoach(@PathVariable Integer userId) {
+        String message = coachService.promoteUserToCoach(userId);
+        return ResponseEntity.ok(message);
+    }
+
+
+
 }

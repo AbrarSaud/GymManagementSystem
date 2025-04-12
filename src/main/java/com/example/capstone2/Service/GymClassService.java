@@ -75,5 +75,23 @@ public class GymClassService {
         return true;
     }
 
+    // update Class Name
+    public String updateClassName(Integer classId, String newName) {
+        GymClass gymClass = gymClassRepository.findGymClassByGymClassId(classId);
+
+        gymClass.setName(newName);
+        gymClassRepository.save(gymClass);
+        return "Class name updated successfully";
+    }
+
+    public String updateRoomNumber(Integer classId, Integer newRoomNumber) {
+        int updatedRows = gymClassRepository.updateRoomNumber(classId, newRoomNumber);
+
+        if (updatedRows > 0) {
+            return "Room number updated successfully.";
+        } else {
+            return "Class not found or update failed.";
+        }
+    }
 
 }

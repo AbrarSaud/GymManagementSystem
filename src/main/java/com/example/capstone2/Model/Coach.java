@@ -32,7 +32,7 @@ public class Coach {
 
     @NotNull(message = "The 'Coach Id' must be NOT Null")
     @Column(columnDefinition = "int not null")
-    @Positive
+    @PositiveOrZero
     private Integer yearsOfExperience;
 
 

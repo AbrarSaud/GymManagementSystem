@@ -72,5 +72,16 @@ public class GymClassController {
         return ResponseEntity.ok(new ApiResponse("Capacity updated !"));
     }
 
+    @PutMapping("/update-class-name/{classId}")
+    public ResponseEntity<String> updateClassName(@PathVariable Integer classId, @RequestParam String newName) {
+        String message = gymClassService.updateClassName(classId, newName);
+        return ResponseEntity.ok(message);
+    }
+
+    @PutMapping("/update-room-number/{classId}")
+    public ResponseEntity<String> updateRoomNumber(@PathVariable Integer classId, @RequestParam Integer newRoomNumber) {
+        String message = gymClassService.updateRoomNumber(classId, newRoomNumber);
+        return ResponseEntity.ok(message);
+    }
 
 }
