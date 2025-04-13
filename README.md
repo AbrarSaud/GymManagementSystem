@@ -31,9 +31,6 @@
   - `DELETE  /api/v1/gym/booking/delete/{comments_id}`             - Delete Booking by ID
 
  ### 15 Endpoints use JPA and JPQL 
-
-## API Endpoints
-
 | Entity  | #  | Endpoint                                                     | Description                                      |
 |---------|----|---------------------------------------------------------------|--------------------------------------------------|
 | Users    | 1  | `GET /api/v1/gym/users/high-bmi`                               | Show a list of users bmi >= 25                             |
