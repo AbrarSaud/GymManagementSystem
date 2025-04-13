@@ -92,8 +92,8 @@ public class UserService {
         } else {
             category = "Obese";
         }
-        userRepository.save(user);
         user.setCategoryBmi(category);
+        userRepository.save(user);
         return "BMI is " + bmi + "Your is " + category;
     }
 

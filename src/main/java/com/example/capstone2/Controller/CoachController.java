@@ -62,13 +62,13 @@ public class CoachController {
         return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
-    // best coaches
+    // (Endpoints #4) Show the best coaches (ordered by experience )
     @GetMapping("/top-coaches")
     public ResponseEntity<?> getCoachesOrdered() {
         return ResponseEntity.ok(coachService.getAllCoachesOrderedByExperience());
     }
 
-    // update Coach  Experience
+    // (Endpoints #5) Update coach experience (if new experience is bigger.)
     @PutMapping("/update-experience/{coach_id}/{newYearsExperience}")
     public ResponseEntity<?> updateCoachExperience(@PathVariable Integer coach_id, @PathVariable Integer newYearsExperience) {
         Coach updateCoach = coachService.updateCoachExperience(coach_id, newYearsExperience);
@@ -78,12 +78,13 @@ public class CoachController {
         return ResponseEntity.ok(new ApiResponse("Coach Update"));
     }
 
+    // (Endpoints #6) Promote user to coach , change a user to a coach.(save new coach, and delete user.)
     @PostMapping("/promote/{userId}")
-    public ResponseEntity<String> promoteUserToCoach(@PathVariable Integer userId) {
-        String message = coachService.promoteUserToCoach(userId);
-        return ResponseEntity.ok(message);
+    public ResponseEntity<?> promoteUserToCoach(@PathVariable Integer userId) {
+        boolean check = coachService.promoteUserToCoach(userId);
+        if (check) {
+            return ResponseEntity.ok(new ApiResponse("User promoted to Coach successfully!"));
+        }
+        return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
-
-
-
 }

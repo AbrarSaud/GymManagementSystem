@@ -11,7 +11,7 @@ import java.util.List;
 public interface CoachRepository extends JpaRepository<Coach, Integer> {
     Coach findCoachByCoachId(Integer coachId);
 
-    // Show the best coaches
+    // Show the best coaches using desc
     @Query("select c from Coach c order by  c.yearsOfExperience desc ")
     List<Coach> getAllCoachesOrderByYearsOfExperienceDesc();
 

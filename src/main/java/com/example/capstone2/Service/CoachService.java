@@ -57,12 +57,12 @@ public class CoachService {
         return true;
     }
 
-    // Show the best coaches
+    // (Endpoints #4) Show the best coaches (ordered by experience )
     public List<Coach> getAllCoachesOrderedByExperience() {
         return coachRepository.getAllCoachesOrderByYearsOfExperienceDesc();
     }
 
-    // Update coach experience
+    // (Endpoints #5) Update coach experience (if new experience is bigger.)
     public Coach updateCoachExperience(Integer coach_id, Integer newYearsExperience) {
         Coach coach = coachRepository.findCoachByCoachId(coach_id);
         if (coach != null && newYearsExperience > coach.getYearsOfExperience()) {
@@ -73,12 +73,12 @@ public class CoachService {
         return null;
     }
 
-    public String promoteUserToCoach(Integer userId) {
+    // (Endpoints #6) Promote user to coach , change a user to a coach.(save new coach, and delete user.)
+    public boolean promoteUserToCoach(Integer userId) {
         User user = userRepository.findUserByUserId(userId);
         if (user == null) {
-          return  "User not found.";
+            return false;
         }
-
         Coach coach = new Coach();
         coach.setName(user.getName());
         coach.setEmail(user.getEmail());
@@ -86,6 +86,6 @@ public class CoachService {
         coach.setYearsOfExperience(0);
         coachRepository.save(coach);
         userRepository.delete(user);
-        return "User promoted to Coach successfully!";
+        return true;
     }
 }

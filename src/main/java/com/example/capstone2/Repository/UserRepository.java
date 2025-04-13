@@ -24,7 +24,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select u.name from User u where u.userId in :userIds")
     List<String> findUsernamesByIds(List<Integer> userIds);
 
-    @Query("SELECT u FROM User u WHERE u.weight >=?1")
-    List<User> findByWeightGreater(Integer weight);
 
 }
