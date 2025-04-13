@@ -65,12 +65,12 @@ public class PersonalTrainingService {
         return true;
     }
 
+    // (Endpoints #10) Get subscription information by personalTrainingId.
     public String getSubscriptionInfo(Integer pt_id) {
         PersonalTraining personalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(pt_id);
         if (personalTraining != null) {
             LocalDate startDate = personalTraining.getStartDate();
             Integer subscriptionMonths = personalTraining.getSubscriptionMonths();
-
             LocalDate endDate = startDate.plusMonths(subscriptionMonths);
 
             LocalDate today = LocalDate.now();
@@ -80,6 +80,7 @@ public class PersonalTrainingService {
         return null;
     }
 
+    // (Endpoints #11) Renew subscription by adding months.
     public String renewSubscription(Integer pt_id, Integer months) {
         PersonalTraining personalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(pt_id);
         User user = userRepository.findUserByUserId(personalTraining.getUserId());
@@ -100,7 +101,7 @@ public class PersonalTrainingService {
         return "Subscription renewed successfully for " + months + " months. Total price: " + personalTraining.getPrice();
     }
 
-    // Discount
+    // (Endpoints #12) Apply discount to subscription.
     public int applyDiscount(Integer pt_Id, double discountPercentage) {
         PersonalTraining personalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(pt_Id);
         price(personalTraining);
@@ -112,6 +113,7 @@ public class PersonalTrainingService {
         return (int) newPrice;
     }
 
+    // (Endpoints #13) Freeze the subscription by pt_id.
     public String freezeSubscription(Integer pt_Id) {
         PersonalTraining personalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(pt_Id);
 
@@ -125,7 +127,7 @@ public class PersonalTrainingService {
         return "Subscription frozen successfully for 20 days.";
     }
 
-    // change Coach
+    // (Endpoints #14) Change the old coach to new coach.
     public boolean changeCoach(Integer ptId, Integer oldCoachId, Integer newCoachId) {
         PersonalTraining personalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(ptId);
         if (personalTraining == null) {
@@ -140,7 +142,7 @@ public class PersonalTrainingService {
         return true;
     }
 
-    // extend Freeze
+    // (Endpoints #15) Extend freeze days for a subscription.
     public String extendFreeze(Integer pt_Id, Integer extraDays) {
         PersonalTraining personalTraining = personalTrainingRepository.findPersonalTrainingByPersonalTrainingId(pt_Id);
         if (personalTraining == null) {
