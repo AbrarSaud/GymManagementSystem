@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CoachRepository extends JpaRepository<Coach, Integer> {
+    // Find one Coach class by CoachId.
     Coach findCoachByCoachId(Integer coachId);
 
     // Show the best coaches using desc

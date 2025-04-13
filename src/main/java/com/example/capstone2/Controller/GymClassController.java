@@ -61,27 +61,27 @@ public class GymClassController {
         return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
-    //    update Capacity
+    // (Endpoints #7) Update gym class capacity (BUT not capacity is same).
     @PutMapping("/update-capacity/{gymClassId}/{newCapacity}")
     public ResponseEntity<?> updateCapacity(@PathVariable Integer gymClassId, @PathVariable Integer newCapacity) {
         boolean isUpdated = gymClassService.updateCapacity(gymClassId, newCapacity);
-
         if (!isUpdated) {
             return ResponseEntity.status(404).body(new ApiResponse("GymClass not found or capacity is the same"));
         }
         return ResponseEntity.ok(new ApiResponse("Capacity updated !"));
     }
 
+    // (Endpoints #8) Update gym class name.
     @PutMapping("/update-class-name/{classId}")
     public ResponseEntity<String> updateClassName(@PathVariable Integer classId, @RequestParam String newName) {
         String message = gymClassService.updateClassName(classId, newName);
         return ResponseEntity.ok(message);
     }
 
+    // (Endpoints #9) Update gym class room number.
     @PutMapping("/update-room-number/{classId}")
-    public ResponseEntity<String> updateRoomNumber(@PathVariable Integer classId, @RequestParam Integer newRoomNumber) {
-        String message = gymClassService.updateRoomNumber(classId, newRoomNumber);
-        return ResponseEntity.ok(message);
+    public ResponseEntity<?> updateRoomNumber(@PathVariable Integer classId, @RequestParam Integer newRoomNumber) {
+        return ResponseEntity.ok(new ApiResponse(gymClassService.updateRoomNumber(classId, newRoomNumber)));
     }
 
 }

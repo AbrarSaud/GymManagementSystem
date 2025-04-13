@@ -60,7 +60,7 @@ public class GymClassService {
         return true;
     }
 
-    // update Capacity
+    // (Endpoints #7) Update gym class capacity (BUT not capacity is same).
     public boolean updateCapacity(Integer gymClassId, Integer newCapacity) {
         GymClass gymClass = gymClassRepository.findGymClassByGymClassId(gymClassId);
 
@@ -75,7 +75,7 @@ public class GymClassService {
         return true;
     }
 
-    // update Class Name
+    // (Endpoints #8) Update gym class name.
     public String updateClassName(Integer classId, String newName) {
         GymClass gymClass = gymClassRepository.findGymClassByGymClassId(classId);
 
@@ -83,7 +83,7 @@ public class GymClassService {
         gymClassRepository.save(gymClass);
         return "Class name updated successfully";
     }
-
+    // (Endpoints #9) Update gym class room number.
     public String updateRoomNumber(Integer classId, Integer newRoomNumber) {
         GymClass updatedRows = gymClassRepository.findGymClassByGymClassIdAndRoomNum(classId, newRoomNumber);
 
