@@ -85,9 +85,9 @@ public class GymClassService {
     }
 
     public String updateRoomNumber(Integer classId, Integer newRoomNumber) {
-        int updatedRows = gymClassRepository.updateRoomNumber(classId, newRoomNumber);
+        GymClass updatedRows = gymClassRepository.findGymClassByGymClassIdAndRoomNum(classId, newRoomNumber);
 
-        if (updatedRows > 0) {
+        if (updatedRows.getRoomNum() > 0) {
             return "Room number updated successfully.";
         } else {
             return "Class not found or update failed.";

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface GymClassRepository extends JpaRepository<GymClass, Integer> {
     GymClass findGymClassByGymClassId(Integer gymClassId);
 
-    @Query("update GymClass c set c.roomNum =?2 where c.gymClassId=?1")
-    int updateRoomNumber(Integer classId, Integer newRoomNumber);
+    GymClass findGymClassByGymClassIdAndRoomNum(Integer classId, Integer newRoomNumber);
+
 
 
 }

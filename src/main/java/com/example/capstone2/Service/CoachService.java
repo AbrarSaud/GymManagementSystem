@@ -76,7 +76,7 @@ public class CoachService {
     public String promoteUserToCoach(Integer userId) {
         User user = userRepository.findUserByUserId(userId);
         if (user == null) {
-            throw new RuntimeException("User not found.");
+          return  "User not found.";
         }
 
         Coach coach = new Coach();

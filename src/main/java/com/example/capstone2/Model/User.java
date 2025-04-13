@@ -57,11 +57,10 @@ public class User {
     private LocalDate startData;
 
     @Column(columnDefinition = "double")
-    private Double bmi;
-
+    private Double bmi=00.00;
 
     @Column(columnDefinition = "varchar(255) ")
-    private String categoryBmi;
+    private String categoryBmi=" ";
 
 
 }

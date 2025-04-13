@@ -9,9 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface PersonalTrainingRepository extends JpaRepository<PersonalTraining, Integer> {
     PersonalTraining findPersonalTrainingByPersonalTrainingId(Integer personalTrainingId);
 
-
-
-
 }
 
 

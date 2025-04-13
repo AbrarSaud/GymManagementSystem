@@ -25,7 +25,6 @@ public class UserService {
         if (user == null) {
             return false;
         }
-        calculateBmi(user);
         userRepository.save(user);
         return true;
     }
@@ -48,8 +47,6 @@ public class UserService {
         oldUser.setWeight(user.getWeight());
         oldUser.setHeight(user.getHeight());
         oldUser.setStartData(user.getStartData());
-        calculateBmi(oldUser);
-
         userRepository.save(oldUser);
         return true;
     }
@@ -64,23 +61,27 @@ public class UserService {
         return true;
     }
 
-    //Show a list of users bmi >= 25
+    //    (Endpoints # 1)  We get all users where BMI is bigger than or equal to 25.
     public List<User> getUsersWithBmi() {
         return userRepository.getUsersWithBmiGreater();
     }
 
-    //Show a list of New users
+    //  (Endpoints # 2)   Show a list of new users in the last 7 days.( calculate the date 7 days )
     public List<User> getNewUsers() {
         LocalDate weekAgo = LocalDate.now().minusDays(7);
         return userRepository.findNewUsers(weekAgo);
     }
 
-    // calculateBmi
-    private void calculateBmi(User user) {
+    //    (Endpoints # 3 ) calculate his BMI from weight and height by user ID.
+    //    Then save the new BMI and category in database.
+    public String calculateBmi(Integer user_id) {
+        User user = userRepository.findUserByUserId(user_id);
+        if (user == null) {
+            return "Not found";
+        }
         Double bmi = user.getWeight() / Math.pow(user.getHeight() / 100.0, 2);
         bmi = (int) (bmi * 100) / 100.0;
         user.setBmi(bmi);
-
         String category;
         if (bmi < 18.5) {
             category = "Underweight";
@@ -91,7 +92,9 @@ public class UserService {
         } else {
             category = "Obese";
         }
+        userRepository.save(user);
         user.setCategoryBmi(category);
+        return "BMI is " + bmi + "Your is " + category;
     }
 
 }

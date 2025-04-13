@@ -60,16 +60,26 @@ public class UserController {
         return ResponseEntity.status(404).body(new ApiResponse("Not found"));
     }
 
-    //Show a list of users bmi >= 25
+    //   (Endpoints # 1)  Get all users where BMI is bigger than or equal to 25.
     @GetMapping("/high-bmi")
     public ResponseEntity<?> getUsersWithBmi() {
         return ResponseEntity.ok(userService.getUsersWithBmi());
     }
 
-    //Show a list of New users
+    //  (Endpoints # 2)   Show a list of new users in the last 7 days.( calculate the date 7 days )
     @GetMapping("/new")
     public ResponseEntity<?> getNewUsersToday() {
         return ResponseEntity.ok(userService.getNewUsers());
     }
 
+//    (Endpoints # 3 ) calculate his BMI from weight and height by user ID.
+//    Then save the new BMI and category in database.
+    @PutMapping("/calculate-bmi/{user_id}")
+    private ResponseEntity<?> calculateBmi(@PathVariable Integer user_id) {
+        String message = userService.calculateBmi(user_id);
+        if (message.contains("not found")) {
+            return ResponseEntity.status(404).body(new ApiResponse(message));
+        }
+        return ResponseEntity.ok(new ApiResponse(message));
+    }
 }
