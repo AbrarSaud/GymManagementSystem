@@ -25,19 +25,26 @@ public class BookingService {
         return bookingRepository.findAll();
     }
 
-    // Add new booking
-    public void addBooking(Booking booking) {
+    //(Endpoints #16)  Add new booking.
+    //  check if user and gym class exist. If both exist and capacity > 0,  decrease capacity by 1 and save the booking.
+    public Boolean addBooking(Booking booking) {
         User existingUser = userRepository.findUserByUserId(booking.getUserId());
         GymClass checkCapacity = gymClassRepository.findGymClassByGymClassId(booking.getGymClassId());
-
-        if (existingUser != null && checkCapacity != null && checkCapacity.getCapacity() > 0) {
-            checkCapacity.setCapacity(checkCapacity.getCapacity() - 1);
-            gymClassRepository.save(checkCapacity);
-            bookingRepository.save(booking);
+        if (existingUser == null) {
+            return false;
         }
+        if (checkCapacity == null || checkCapacity.getCapacity() <= 0) {
+            return false;
+        }
+        checkCapacity.setCapacity(checkCapacity.getCapacity() - 1);
+        gymClassRepository.save(checkCapacity);
+        bookingRepository.save(booking);
+        return true;
+
     }
 
-    // Delete booking
+    //(Endpoints #17)  Delete a booking.
+    //  check if booking exists and  If booking exists,  increase gym class capacity by 1 and delete the booking.
     public Boolean deleteBooking(Integer bookingId) {
         Booking existingBooking = bookingRepository.getBookingsById(bookingId);
         if (existingBooking == null) {
@@ -52,6 +59,7 @@ public class BookingService {
         return true;
     }
 
+    // (Endpoints #18) Show usernames in one gym class.
     public List<String> getUsernamesInGymClass(Integer gymClassId) {
         List<Integer> userIds = bookingRepository.findUserIdsByGymClassId(gymClassId);
         if (userIds == null) {
@@ -60,7 +68,7 @@ public class BookingService {
         return userRepository.findUsernamesByIds(userIds);
     }
 
-    //  change  GymClass
+    // (Endpoints #19) Change user from old gym class to new gym class.
     public Boolean changeUserGymClass(Integer userId, Integer oldGymClassId, Integer newGymClassId) {
         Booking existingBooking = bookingRepository.getBookingByUserIdAndGymClassId(userId, oldGymClassId);
         if (existingBooking == null) {
@@ -82,7 +90,6 @@ public class BookingService {
         bookingRepository.save(existingBooking);
         return true;
     }
-
 
 
 }

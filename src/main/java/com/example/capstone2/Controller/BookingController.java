@@ -24,17 +24,22 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.getAllBookings());
     }
 
-    // Add new booking
+    //(Endpoints #16)  Add new booking.
+    //  check if user and gym class exist. If both exist and capacity > 0,  decrease capacity by 1 and save the booking.
     @PostMapping("/add")
     public ResponseEntity<?> addBooking(@Valid @RequestBody Booking booking, Errors errors) {
         if (errors.hasErrors()) {
             return ResponseEntity.status(400).body(errors.getFieldError().getDefaultMessage());
         }
-        bookingService.addBooking(booking);
-        return ResponseEntity.status(200).body(new ApiResponse("Booking added !"));
+        Boolean isAdded = bookingService.addBooking(booking);
+        if (!isAdded) {
+            return ResponseEntity.status(404).body(new ApiResponse("User or GymClass not found or no capacity."));
+        }
+        return ResponseEntity.status(200).body(new ApiResponse("Booking added!"));
     }
 
-    // Delete booking
+    //(Endpoints #17)  Delete a booking.
+    //  check if booking exists and  If booking exists,  increase gym class capacity by 1 and delete the booking.
     @DeleteMapping("/delete/{booking_id}")
     public ResponseEntity<?> deleteBooking(@PathVariable Integer booking_id) {
         Boolean isDeleted = bookingService.deleteBooking(booking_id);
@@ -44,13 +49,14 @@ public class BookingController {
         return ResponseEntity.status(200).body(new ApiResponse("Booking deleted !"));
     }
 
-
+    // (Endpoints #18) Show usernames in one gym class.
     @GetMapping("/class/{gymClassId}")
     public ResponseEntity<List<String>> getUsernamesInClass(@PathVariable Integer gymClassId) {
         List<String> usernames = bookingService.getUsernamesInGymClass(gymClassId);
         return ResponseEntity.ok(usernames);
     }
 
+    // (Endpoints #19) Change user from old gym class to new gym class.
     @PutMapping("/change/{userId}/{oldGymClassId}/{newGymClassId}")
     public ResponseEntity<?> changeUserGymClass(@PathVariable Integer userId, @PathVariable Integer oldGymClassId, @PathVariable Integer newGymClassId) {
         Boolean isChanged = bookingService.changeUserGymClass(userId, oldGymClassId, newGymClassId);
