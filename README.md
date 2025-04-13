@@ -30,31 +30,38 @@
   - `POST    /api/v1/gym/booking/add `             - Create new Booking  
   - `DELETE  /api/v1/gym/booking/delete/{comments_id}`             - Delete Booking by ID
 
- ### 15 Endpoints use JPA and JPQL 
-| Entity  | #  | Endpoint                                                     | Description                                      |
-|---------|----|---------------------------------------------------------------|--------------------------------------------------|
-| Users    | 1  | `GET /api/v1/gym/users/high-bmi`                               | Show a list of users bmi >= 25                             |
-| Users    | 2  | `GET /api/v1/gym/users/new`                                    | Show a list of New users                             |
-| Coach    | 3  | `GET /api/v1/gym/coach/top-coaches`                    | Get best coaches                |
-| Coach    | 4  | `PUT /api/v1/gym/coach/update-experience/{{coach_id}}/{{newYearsExperience}}`            | update Coach  Experience          |
-| Coach | 5  | `POST api/v1/gym/coach/promote/{{userId}}`                       | promote User To Coach             |
-| GymClass | 6  | `PUT /api/v1/gym/gym-class/update-capacity/{{gymClassId}}/{{newCapacity}}`              | update capacity         |
-| GymClass    | 7  | `PUT /api/v1/gym/gym-class/update-class-name/{{classId}}?newName={{$newName}}`     |  update class name                      |
-| GymClass    | 8  | `PUT /api/v1/gym/gym-class/update-room-number/{{classId}}?newRoomNumber={{$newRoomNumber}`          | Get users registered before a specific Date      |
-| Personal-Training    | 9  | `GET /api/v1/gym/personal-training/subscription-info/{{personalTrainingId}}`          | Get Subscription Info      |
-| Personal-Training    | 10  | `POST /api/v1/gym/personal-training/renew/{{pt_id}}/{{months}}`          | renew  Subscription     |
-| Personal-Training     | 11  | `POST /api/v1/gym/personal-training/freeze/{{pt_id}}`          | freeze     |
-| Personal-Training     | 12  | `PUT /api/v1/gym/personal-training/change-coach/{{ptId}}/{{oldCoachId}}/{{newCoachId}}`          | change Coach     |
-| Personal-Training     | 13  | `PUT /api/v1/gym/personal-training/extend-freeze/{{pt_Id}}?extraDays={{$random.integer(100)}}`          | extend Freeze     |
-| Booking     | 14  | `GET /api/v1/gym/booking/class/{{gymClassId}}`          | get Usernames In Class    |
-| Booking     | 15 | `GET /api/v1/gym/booking/change/{{userId}}/{{oldGymClassId}}/{{newGymClassId}}`          | Change UserGym Class    |
+### 15 Endpoints use JPA and JPQL
+
+### 15 Endpoints use JPA and JPQL
+
+| #  | Entity           | Endpoint | Description |
+|----|------------------|----------|-------------|
+| 1  | Users            | `GET /api/v1/gym/users/high-bmi` | Get all users where BMI is greater than or equal to 25. |
+| 2  | Users            | `GET /api/v1/gym/users/new` | Get users registered within the last 7 days. |
+| 3  | Users            | `PUT /api/v1/gym/users/calculate-bmi/{user_id}` | Calculate BMI using weight and height, and update user's BMI and category. |
+| 4  | Coach            | `GET /api/v1/gym/coach/top-coaches` | Get all coaches ordered by years of experience (best coaches first). |
+| 5  | Coach            | `PUT /api/v1/gym/coach/update-experience/{coach_id}/{newYearsExperience}` | Update a coach's years of experience if the new experience value is higher. |
+| 6  | Coach            | `POST /api/v1/gym/coach/promote/{userId}` | Promote a user to coach by saving new coach info and deleting user account. |
+| 7  | GymClass         | `PUT /api/v1/gym/gym-class/update-capacity/{gymClassId}/{newCapacity}` | Update gym class capacity if new capacity is different from the current one. |
+| 8  | GymClass         | `PUT /api/v1/gym/gym-class/update-class-name/{classId}` | Update the name of a gym class. |
+| 9  | GymClass         | `PUT /api/v1/gym/gym-class/update-room-number/{classId}` | Update the room number assigned to a gym class. |
+| 10 | Personal-Training| `GET /api/v1/gym/personal-training/subscription-info/{personalTrainingId}` | Get subscription information by personal training ID if it exists. |
+| 11 | Personal-Training| `POST /api/v1/gym/personal-training/renew/{pt_id}/{months}` | Renew a subscription by adding the specified number of months. |
+| 12 | Personal-Training| `POST /api/v1/gym/personal-training/discount/{pt_id}` | Apply a discount to a subscription and update the subscription price. |
+| 13 | Personal-Training| `PUT /api/v1/gym/personal-training/freeze/{pt_id}` | Freeze an active subscription using the personal training ID. |
+| 14 | Personal-Training| `PUT /api/v1/gym/personal-training/change-coach/{pt_id}/{newCoachId}` | Change the coach assigned to a subscription by updating to a new coach ID. |
+| 15 | Personal-Training| `PUT /api/v1/gym/personal-training/extend-freeze/{pt_id}` | Extend the freeze period by adding extra freeze days to the subscription. |
 
 
-##  Extra Endpoint
-| Entity  | #  | Endpoint                                                     | Description                                      |
-|---------|----|---------------------------------------------------------------|--------------------------------------------------|
-| Booking    | 1  | `POST /api/v1/gym/booking/add`                               | Add new booking                           |
-| Booking    | 3  | `DELETE  /api/v1/gym/booking/delete/{{booking_id}}`             | Delete Booking by ID                           |
+
+## Extra Endpoint
+
+| #  | Entity  | Endpoint | Description |
+|----|---------|----------|-------------|
+| 16 | Booking | `POST /api/v1/gym/booking/add` | Add a booking if user and gym class exist, and capacity > 0. Decrease capacity by 1 and save booking. |
+| 17 | Booking | `DELETE /api/v1/gym/booking/delete/{booking_id}` | Delete a booking if it exists, and increase gym class capacity by 1. |
+| 18 | Booking | `GET /api/v1/gym/booking/class/{gymClassId}` | Show all usernames registered in a specific gym class. |
+| 19 | Booking | `PUT /api/v1/gym/booking/change/{userId}/{oldGymClassId}/{newGymClassId}` | Change a user's gym class by moving them from the old class to the new one. |
 
 
 
