@@ -1,4 +1,39 @@
-##  API Endpoints
+# Gym Management System 🏋️‍♂️📅
+
+## 📌 Project Overview
+
+This is a **Gym Management System**.  
+It helps gym admins to organize workout class schedules, manage user subscriptions, and assign personal training sessions to coaches.  
+The system is built using **Java** and **Spring Boot**.
+
+---
+
+## 🚀 Main Features
+
+- 👤 **User Management** – Create, update, and delete gym users  
+- 🧑‍🏫 **Coach Assignments** – Manage coaches and their experience  
+- 📆 **Workout Classes** – Add and organize gym class schedules  
+- 🏋️ **Personal Training** – Manage training sessions and renew subscriptions  
+- 📝 **Booking System** – Book classes and track gym capacity  
+
+---
+
+## 🛠️ Technologies & Tools
+
+| Technology               | Purpose                                |
+|--------------------------|----------------------------------------|
+| `Spring Boot`            | Backend framework                      |
+| `Spring Web`             | Build REST APIs                        |
+| `Spring Data JPA`        | Work with database                     |
+| `Spring Validation`      | Handle input validation                |
+| `MySQL`                  | Relational database                    |
+| `Lombok`                 | Simplify Java code with annotations    |
+| `Maven`                  | Project build and dependency manager   |
+| `Postman`                | API testing                            |
+
+---
+
+## 📂 API Endpoints
 
  ### CRUD(create, read, update, and delete data.).
 - **User:**
